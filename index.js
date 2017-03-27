@@ -4,12 +4,31 @@
 /* jshint esnext:true,eqeqeq:true,undef:true,lastsemic:true,strict:true,unused:true,node:true */
 
 module.exports = function pipeToStorage(storage){
-    return function(localStream, bucketName, fileName){
+    "use strict";
+    return function(localStream, bucketName, fileName, opt){
+	function contentType(what){
+	    return {
+		metadata: {
+		    contentType: what
+		}
+	    };
+	}
+	let meta;
+	let wsOptions = {resumable:false};
+	if (opt === 'json'){
+	    meta = contentType('application/json');
+	} else if (opt && (typeof(opt)==='string')){
+	    meta = contentType(opt);
+	} else if (opt && (typeof(opt)==='object')){
+	    meta = opt;
+	}
+	if (meta)
+	    Object.assign(wsOptions, meta);
 	return new Promise(function(resolve, reject){
 	    const remote = (storage
 			    .bucket(bucketName)
 			    .file(fileName)
-			    .createWriteStream({resumable:false})
+			    .createWriteStream(wsOptions)
 			   );
 	    localStream.on('end', function(){
 		resolve({bucket: bucketName, file: fileName});
@@ -20,6 +39,6 @@ module.exports = function pipeToStorage(storage){
 	    });
 	    localStream.pipe(remote);
 	});
-    }
-}
+    };
+};
     
