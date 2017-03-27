@@ -1,0 +1,19 @@
+{
+  "name": "pipe-to-storage",
+  "version": "0.1.0",
+  "description": "returns Promise that resolves on saving a local readable stream to a Google Cloud storage bucket",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DrPaulBrewer/pipe-to-storage.git"
+  },
+  "author": "drpaulbrewer@eaftc.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DrPaulBrewer/pipe-to-storage/issues"
+  },
+  "homepage": "https://github.com/DrPaulBrewer/pipe-to-storage#readme"
+}
