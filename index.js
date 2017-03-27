@@ -30,11 +30,18 @@ module.exports = function pipeToStorage(storage){
 			    .file(fileName)
 			    .createWriteStream(wsOptions)
 			   );
-	    localStream.on('end', function(){
+
+	    // writing is finished when .finish is fired on remote
+	    // https://googlecloudplatform.github.io/google-cloud-node/#/docs/storage/0.8.0/storage/file?method=createWriteStream
+	    
+	    remote.on('finish', function(){
 		resolve({bucket: bucketName, file: fileName});
 	    });
 	    localStream.on('error', function(e){
-		// remote.end();
+		remote.end();
+		reject("piptToStorage: error reading local input stream:"+e);
+	    });
+	    remote.on('error', function(e){
 		reject("pipeToStorage: error while writing gs://"+bucketName+"/"+fileName+":"+e);
 	    });
 	    localStream.pipe(remote);
