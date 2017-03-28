@@ -29,12 +29,12 @@ is used that is appropriate for a cloud back-end environment: up to 10 retries p
 
 `optional` may be:
 
-* the string `'json'` is shorthand to set `content-type: application/json`
-* other strings will set the content type exactly
-* an object overrides `writeStream.options` in the storage call
+* the string `'json'`, shorthand to set metadata `content-type: application/json`
+* other strings, for setting the `content-type` (be precise)
+* an object, to set any `writeStream.options` in the internal storage `createWriteStream` call
 
-returns a Promise that resolves after saving the string or stream contents in `source` to 
-`storage.bucket(bucketName).file(fileName)` or rejects with any errors
+returns a Promise that resolves after saving the contents of `source` to 
+`storage.bucket(bucketName).file(fileName)` or rejects with any errors not caught in retrys
 
 
 
