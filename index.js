@@ -51,7 +51,7 @@ module.exports = function pipeToStorage(storage, _retryStrategy){
 	    };
 	}
 	function isStreamLike(s){
-	    return ((s) && (typeof(s)==='object') && (typeof(s.on)==='function') && (typeof(s.pipe)!=='function'));
+	    return ((s) && (typeof(s)==='object') && (typeof(s.on)==='function') && (typeof(s.pipe)==='function'));
 	}
 	let meta;
 	let wsOptions = {resumable:false};
