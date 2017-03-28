@@ -14,9 +14,16 @@ On other platforms: see [npm docs](https://www.npmjs.com/package/@google-cloud/s
 
 ## Usage
 
-    pipeToStorage(source, bucketName, fileName [, optional] )
+    pipeToStorage(source, bucketName, fileName , optional )
+    .then(function onSuccess(what){ 
+       console.log("hooray! I wrote "+what.file+" to bucket "+what.bucket);
+     })
+     .catch(function(e){
+       console.log("oh no! an error occurred. here it is:");
+       console.log(e);
+     });
 
-`source` may be:
+`source` must be either:
 
 * a string, which will be sent as-is to the new file [retry will use the same string]
 * a function that returns a readable stream [retry will call the function to get a fresh readable stream]
@@ -27,7 +34,7 @@ is used that is appropriate for a cloud back-end environment: up to 10 retries p
 
 `bucketname` and `filename` are the Google Cloud Storage[tm] bucket and file names.  `gs://` is **not** needed in `bucketName`
 
-`optional` may be:
+`optional` is optional and may be:
 
 * the string `'json'`, shorthand to set metadata `content-type: application/json`
 * other strings, for setting the `content-type` (be precise)
