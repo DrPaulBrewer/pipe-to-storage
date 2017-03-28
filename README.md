@@ -43,6 +43,18 @@ is used that is appropriate for a cloud back-end environment: up to 10 retries p
 returns a Promise that resolves after saving the contents of `source` to 
 `storage.bucket(bucketName).file(fileName)` or rejects with any errors not caught in retrys
 
+## Copyright
 
+Copyright 2017 Paul Brewer, Economic and Financial Technology Consulting LLC <drpaulbrewer@eaftc.com>
+
+## License
+
+The MIT License
+
+### No relationship to Google, Inc. 
+
+This is third party software, not a product of Google Inc.
+
+The author(s) have no relationship to Google, Inc. 
 
 
