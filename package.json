@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/DrPaulBrewer/pipe-to-storage/issues"
   },
-  "homepage": "https://github.com/DrPaulBrewer/pipe-to-storage#readme"
+  "homepage": "https://github.com/DrPaulBrewer/pipe-to-storage#readme",
+  "dependencies": {
+    "into-stream": "^3.1.0",
+    "promise-retry": "^1.1.1"
+  }
 }
