@@ -7,6 +7,7 @@ const intoStream = require('into-stream');
 const promiseRetry = require('promise-retry');
 
 function storeOrFail(storage, localStream, bucketName, fileName, wsOptions){
+    "use strict";
     return new Promise(function(resolve, reject){
 	const remote = (storage
 			.bucket(bucketName)
@@ -29,7 +30,7 @@ function storeOrFail(storage, localStream, bucketName, fileName, wsOptions){
 	});
 	localStream.pipe(remote);
     });
-};
+}
 
 
 module.exports = function pipeToStorage(storage, _retryStrategy){
@@ -76,4 +77,5 @@ module.exports = function pipeToStorage(storage, _retryStrategy){
 	    }, retryStrategy);
 	}
 	return storeOrFail(storage, source, bucketName, fileName, wsOptions);
+    };
 };
