@@ -57,7 +57,7 @@ module.exports = function pipeToStorage(storage, _retryStrategy){
 	let wsOptions = {resumable:false};
 	let streamer;
 	if ((!source) || ((typeof(source)==='object') && (!isStreamLike(source)))){
-	    return new Promise.reject(new Error("source object passed to pipeToStorage is not a readable stream"));
+	    return Promise.reject(new Error("source object passed to pipeToStorage is not a readable stream:"+JSON.stringify(source)));
 	}
 	if (typeof(source)==='string'){
 	    streamer = ()=>(intoStream(source));
@@ -77,7 +77,7 @@ module.exports = function pipeToStorage(storage, _retryStrategy){
 	    return promiseRetry(function(retry, attempt){
 		const localStream = streamer();
 		if (!isStreamLike(localStream))
-		    return Promise.reject(new Error("stream factory function did not return a readable stream"));
+		    return Promise.reject(new Error("stream factory function did not return a readable stream: "+JSON.stringify(localStream)));
 		return storeOrFail(storage, localStream, bucketName, fileName, wsOptions).catch(function(e){
 		    console.log("error on attempt: ", attempt);
 		    console.log(e);
