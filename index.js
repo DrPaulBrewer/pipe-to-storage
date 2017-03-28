@@ -17,7 +17,7 @@ function storeOrFail(storage, localStream, bucketName, fileName, wsOptions){
 
 	// writing is finished when .finish is fired on remote
 	// https://googlecloudplatform.github.io/google-cloud-node/#/docs/storage/0.8.0/storage/file?method=createWriteStream
-	
+
 	remote.on('finish', function(){
 	    resolve({bucket: bucketName, file: fileName});
 	});
@@ -53,6 +53,9 @@ module.exports = function pipeToStorage(storage, _retryStrategy){
 	let meta;
 	let wsOptions = {resumable:false};
 	let streamer;
+	if ((!source) || ((typeof(source)==='object') && (typeof(source.on)!=='function') || (typeof(source.pipe)!=='function'))){
+	    return new Promise.reject(new Error("source passed to pipeToStorage is not a readable stream, function, or string"));
+	}
 	if (typeof(source)==='string'){
 	    streamer = ()=>(intoStream(source));
 	} else if (typeof(source)==='function'){
@@ -73,6 +76,7 @@ module.exports = function pipeToStorage(storage, _retryStrategy){
 		return storeOrFail(storage, localStream, bucketName, fileName, wsOptions).catch(function(e){
 		    console.log("error on attempt: ", attempt);
 		    console.log(e);
+		    retry();
 		});
 	    }, retryStrategy);
 	}
