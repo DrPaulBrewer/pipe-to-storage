@@ -30,7 +30,7 @@ On other platforms: see [npm docs](https://www.npmjs.com/package/@google-cloud/s
 * a readable stream [can not retry]
 
 `npm:promise-retry` will be used to retry failed storage promises in the first two cases.  A retry strategy
-is used that is appropriate for a cloud back-end environment: up to 10 retries per call within 1-2 minutes, then fail.
+is used that is appropriate for a cloud back-end environment: up to 3 retries per call within 30 seconds, then fail.
 
 `bucketname` and `filename` are the Google Cloud Storage[tm] bucket and file names.  `gs://` is **not** needed in `bucketName`
 

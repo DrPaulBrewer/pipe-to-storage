@@ -36,7 +36,7 @@ function storeOrFail(storage, localStream, bucketName, fileName, wsOptions){
 module.exports = function pipeToStorage(storage, _retryStrategy){
     "use strict";
     const retryStrategy = _retryStrategy || {
-	retries: 10,
+	retries: 3,
 	factor: 1.5,
 	minTimeout:  1000,
 	maxTimeout: 10000,
