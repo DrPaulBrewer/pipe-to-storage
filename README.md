@@ -18,8 +18,8 @@ On other platforms: see [npm docs](https://www.npmjs.com/package/@google-cloud/s
 
 `source` may be:
 
-* a string, which will be sent as-is to the new file [retry with same string]
-* a function that returns a readable stream [retry by calling function to get fresh readable stream]
+* a string, which will be sent as-is to the new file [retry will use the same string]
+* a function that returns a readable stream [retry will call the function to get a fresh readable stream]
 * a readable stream [can not retry]
 
 `npm:promise-retry` will be used to retry failed storage promises in the first two cases.  A retry strategy
