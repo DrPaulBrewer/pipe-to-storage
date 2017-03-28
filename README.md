@@ -15,7 +15,7 @@ On other platforms: see [npm docs](https://www.npmjs.com/package/@google-cloud/s
 ## Usage
 
     pipeToStorage(source, bucketName, fileName , optional )
-    .then(function onSuccess(what){ 
+    .then(function(what){ 
        console.log("hooray! I wrote "+what.file+" to bucket "+what.bucket);
      })
      .catch(function(e){
