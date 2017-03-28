@@ -50,11 +50,14 @@ module.exports = function pipeToStorage(storage, _retryStrategy){
 		}
 	    };
 	}
+	function isStreamLike(s){
+	    return ((s) && (typeof(s)==='object') && (typeof(s.on)==='function') && (typeof(s.pipe)!=='function'));
+	}
 	let meta;
 	let wsOptions = {resumable:false};
 	let streamer;
-	if ((!source) || ((typeof(source)==='object') && (typeof(source.on)!=='function') || (typeof(source.pipe)!=='function'))){
-	    return new Promise.reject(new Error("source passed to pipeToStorage is not a readable stream, function, or string"));
+	if ((!source) || ((typeof(source)==='object') && (!isStreamLike(source)))){
+	    return new Promise.reject(new Error("source object passed to pipeToStorage is not a readable stream"));
 	}
 	if (typeof(source)==='string'){
 	    streamer = ()=>(intoStream(source));
@@ -73,6 +76,8 @@ module.exports = function pipeToStorage(storage, _retryStrategy){
 	if (typeof(streamer)==='function'){
 	    return promiseRetry(function(retry, attempt){
 		const localStream = streamer();
+		if (!isStreamLike(localStream))
+		    return Promise.reject(new Error("stream factory function did not return a readable stream"));
 		return storeOrFail(storage, localStream, bucketName, fileName, wsOptions).catch(function(e){
 		    console.log("error on attempt: ", attempt);
 		    console.log(e);
