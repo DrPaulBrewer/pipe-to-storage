@@ -50,7 +50,7 @@ function testWrite(source, fname, contents){
 
 }
 
-describe('pipeToStorage: ', function(){
+function suite(){
     describe('setup:', function(){
 	it('should be a function', function(){
 	    assert.equal(typeof(pipeToStorage), 'function');
@@ -75,4 +75,14 @@ describe('pipeToStorage: ', function(){
 	const fname = 'stream-test.txt';
 	testWrite(source, fname, contents);
     });
+}
+
+describe('pipeToStorage, test group 1 (immediate) : ', function(){
+    suite();
 });
+
+setTimeout( ()=>{
+    describe('pipeToStorage, test group 2 (after 5 minutes) : ', function(){
+	suite();
+    });
+},  5*60*1000);
