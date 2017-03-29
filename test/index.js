@@ -71,7 +71,7 @@ describe('pipeToStorage: ', function(){
     describe('write from a readable stream (no retries)', function(){
 	const localfname = './test/index.js';
 	const source = fs.createReadStream(localfname);
-	const contents = fs.readFileSync(localname, 'utf8');
+	const contents = fs.readFileSync(localfname, 'utf8');
 	const fname = 'stream-test.txt';
 	testWrite(source, fname, contents);
     });
