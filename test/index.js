@@ -59,19 +59,20 @@ describe('pipeToStorage: ', function(){
     describe('write a string', function(){
 	const msg = 'Hello World '+Math.random();
 	const fname = 'string-test.txt';
-	writeTest(msg, fname, msg);
+	testWrite(msg, fname, msg);
     });
     describe('write from a function that returns readable stream, via a function (allows retry)', function(){
 	const localfname = './test/index,js';
 	const source = ()=>(fs.createReadStream(localfname));
 	const fname = 'function-test.txt';
 	const contents = fs.readFileSync(localname, 'utf8');
-	writeTest(source, fname, contents);
+	testWrite(source, fname, contents);
     });
     describe('write from a readable stream (no retries)', function(){
 	const localfname = './test/index.js';
 	const source = fs.createReadStream(localfname);
 	const contents = fs.readFileSync(localname, 'utf8');
-	writeTest(source, fname, contents);
+	const fname = 'stream-test.txt';
+	testWrite(source, fname, contents);
     });
 });
