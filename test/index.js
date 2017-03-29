@@ -86,7 +86,7 @@ describe('pipeToStorage, test group 1 ', function(){
 
 describe('pipeToStorage, test group 2 (with 5 min delay) ', function(){
     this.timeout(8*60*1000);
-    beforeEach(function(done){
+    before(function(done){
 	setTimeout(done, 5*60*1000);
     });
     suite();
