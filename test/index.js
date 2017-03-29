@@ -10,6 +10,7 @@ const storage = require('@google-cloud/storage')({
 
 const pipeToStorage = require('../index.js')(storage);
 const bucket = 'eaftc-travis-testing';
+const badBucket = 'eaftc-travis-testing-nonexistent-bucket';
 
 function rm(fname){
  
@@ -18,7 +19,14 @@ function rm(fname){
 const fs = require('fs');
 
 function testWrite(source, fname, contents){
-    it(new Date().toString()+' should write without error, resolving to {bucket, file}', function(done){
+    it(new Date().toString()+' should reject writing to a bad bucket', function(done){
+	(pipeToStorage("Hello Evil World", badBucket, "bad.txt")
+	 .then(function(ok){ done(new Error("got ok, but expected error "+JSON.stringify(ok))); },
+	       function(e){ done(); })
+	);
+    });
+    
+    it(new Date().toString()+' should write to good bucket without error, resolving to {bucket, file}', function(done){
 	(pipeToStorage(source, bucket, fname)
 	 .then(function(ok){
 	     assert.equal(ok.bucket, bucket);
