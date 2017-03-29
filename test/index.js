@@ -43,12 +43,12 @@ function testWrite(source, fname, contents){
 	);
     });
     it(new Date().toString()+' cleanup', function(done){
-	return (storage
-		.bucket(bucket)
-		.file(fname)
-		.delete()
-		.then(()=>{done();})
-	       );
+	(storage
+	 .bucket(bucket)
+	 .file(fname)
+	 .delete()
+	 .then(()=>{done();})
+	);
     }); 
 
 }
@@ -87,7 +87,7 @@ describe('pipeToStorage, test group 1 ', function(){
 describe('pipeToStorage, test group 2 (with 5 min delay) ', function(){
     this.timeout(8*60*1000);
     beforeEach(function(done){
-	setTimeout(5*60*1000, done);
+	setTimeout(done, 5*60*1000);
     });
     suite();
 });
