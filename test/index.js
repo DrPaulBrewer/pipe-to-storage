@@ -19,13 +19,6 @@ function rm(fname){
 const fs = require('fs');
 
 function testWrite(source, fname, contents){
-    it(new Date().toString()+' should reject writing to a bad bucket', function(done){
-	(pipeToStorage("Hello Evil World", badBucket, "bad.txt")
-	 .then(function(ok){ done(new Error("got ok, but expected error "+JSON.stringify(ok))); },
-	       function(e){ done(); })
-	);
-    });
-    
     it(new Date().toString()+' should write to good bucket without error, resolving to {bucket, file}', function(done){
 	(pipeToStorage(source, bucket, fname)
 	 .then(function(ok){
@@ -57,8 +50,13 @@ function testWrite(source, fname, contents){
 	 .delete()
 	 .then(()=>{done();})
 	);
-    }); 
-
+    });
+    it(new Date().toString()+' should reject writing to a bad bucket', function(done){
+	(pipeToStorage("Hello Evil World", badBucket, "bad.txt")
+	 .then(function(ok){ done(new Error("got ok, but expected error "+JSON.stringify(ok))); },
+	       function(e){ done(); })
+	);
+    });
 }
 
 function suite(){
