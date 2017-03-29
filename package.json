@@ -4,7 +4,7 @@
   "description": "returns Promise that resolves on saving a local readable stream to a Google Cloud storage bucket",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node_modules/.bin/mocha --reporter spec --slow 50 --timeout 60000"
   },
   "repository": {
     "type": "git",
@@ -19,5 +19,10 @@
   "dependencies": {
     "into-stream": "^3.1.0",
     "promise-retry": "^1.1.1"
+  },
+  "devDependencies": {
+    "@google-cloud/storage": "^0.8.0",
+    "mocha": "^3.2.0",
+    "should": "^11.2.1"
   }
 }
