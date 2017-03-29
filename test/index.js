@@ -12,10 +12,6 @@ const pipeToStorage = require('../index.js')(storage);
 const bucket = 'eaftc-travis-testing';
 const badBucket = 'eaftc-travis-testing-nonexistent-bucket';
 
-function rm(fname){
- 
-}
-
 const fs = require('fs');
 
 function testWrite(source, fname, contents){

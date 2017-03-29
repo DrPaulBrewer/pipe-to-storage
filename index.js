@@ -74,15 +74,11 @@ module.exports = function pipeToStorage(storage, _retryStrategy){
 	if (meta)
 	    Object.assign(wsOptions, meta);
 	if (typeof(streamer)==='function'){
-	    return promiseRetry(function(retry, attempt){
+	    return promiseRetry(function(retry){
 		const localStream = streamer();
 		if (!isStreamLike(localStream))
 		    return Promise.reject(new Error("pipeToStorage: stream factory function did not return a readable stream: "+JSON.stringify(localStream)));
-		return storeOrFail(storage, localStream, bucketName, fileName, wsOptions).catch(function(e){
-		    console.log("error on attempt: ", attempt);
-		    console.log(e);
-		    retry();
-		});
+		return storeOrFail(storage, localStream, bucketName, fileName, wsOptions).catch(retry);
 	    }, retryStrategy);
 	}
 	return storeOrFail(storage, source, bucketName, fileName, wsOptions);
