@@ -18,33 +18,36 @@ function rm(fname){
 const fs = require('fs');
 
 function testWrite(source, fname, contents){
-    it('should write without error, resolving to {bucket, file}', function(){
-	return (pipeToStorage(source, bucket, fname)
-		.then(function(ok){
-		    assert.equal(ok.bucket, bucket);
-		    assert.equal(ok.file, fname);
-		})
-	       );
+    it('should write without error, resolving to {bucket, file}', function(done){
+	(pipeToStorage(source, bucket, fname)
+	 .then(function(ok){
+	     assert.equal(ok.bucket, bucket);
+	     assert.equal(ok.file, fname);
+	 })
+	 .then(done)
+	);
     });
     
-    it('should read back written message', function(){
-	return (storage
-		.bucket(bucket)
-		.file(fname)
-		.download()
-		.then(function(buffer){
-		    return buffer.toString('utf8');
-		})
-		.then(function(out){
-		    assert.equal(out, contents);
-		})
-	       );
+    it('should read back written message', function(done){
+	(storage
+	 .bucket(bucket)
+	 .file(fname)
+	 .download()
+	 .then(function(buffer){
+	     return buffer.toString('utf8');
+	 })
+	 .then(function(out){
+	     assert.equal(out, contents);
+	 })
+	 .then(done)
+	);
     });
-    it('cleanup', function(){
+    it('cleanup', function(done){
 	return (storage
 		.bucket(bucket)
 		.file(fname)
 		.delete()
+		.then(done)
 	       );
     }); 
 
@@ -81,7 +84,7 @@ describe('pipeToStorage, test group 1 ', function(){
     suite();
 });
 
-describe('pupeToStorage, test group 2 (with 5 min delay) ', function(done){
+describe('pipeToStorage, test group 2 (with 5 min delay) ', function(){
     this.timeout(8*60*1000);
     beforeEach(function(done){
 	setTimeout(5*60*1000, done);
