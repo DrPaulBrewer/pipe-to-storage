@@ -62,7 +62,7 @@ describe('pipeToStorage: ', function(){
 	testWrite(msg, fname, msg);
     });
     describe('write from a function that returns readable stream, via a function (allows retry)', function(){
-	const localfname = './test/index,js';
+	const localfname = './test/index.js';
 	const source = ()=>(fs.createReadStream(localfname));
 	const fname = 'function-test.txt';
 	const contents = fs.readFileSync(localfname, 'utf8');
