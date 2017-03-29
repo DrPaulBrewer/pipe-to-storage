@@ -77,18 +77,14 @@ function suite(){
     });
 }
 
-describe('pipeToStorage, test group 1 (at '+new Date()+') ', function(){
+describe('pipeToStorage, test group 1 ', function(){
     suite();
 });
 
-describe('pupeToStorage, test group 2 ', function(done){
+describe('pupeToStorage, test group 2 (with 5 min delay) ', function(done){
     this.timeout(8*60*1000);
-    
-    setTimeout( () => {
-	describe('at '+new Date()+' ', function(){
-	    suite();
-	    done();
-	});
-    },  5*60*1000);
-
+    beforeEach(function(done){
+	setTimeout(5*60*1000, done);
+    });
+    suite();
 });
