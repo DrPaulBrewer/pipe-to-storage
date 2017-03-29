@@ -43,7 +43,7 @@ function testWrite(source, fname, contents){
     it('cleanup', function(){
 	return (storage
 		.bucket(bucket)
-		.file(bfname)
+		.file(fname)
 		.delete()
 	       );
     }); 
@@ -65,7 +65,7 @@ describe('pipeToStorage: ', function(){
 	const localfname = './test/index,js';
 	const source = ()=>(fs.createReadStream(localfname));
 	const fname = 'function-test.txt';
-	const contents = fs.readFileSync(localname, 'utf8');
+	const contents = fs.readFileSync(localfname, 'utf8');
 	testWrite(source, fname, contents);
     });
     describe('write from a readable stream (no retries)', function(){
