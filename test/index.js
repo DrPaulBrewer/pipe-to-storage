@@ -18,7 +18,7 @@ function rm(fname){
 const fs = require('fs');
 
 function testWrite(source, fname, contents){
-    it('should write without error, resolving to {bucket, file}', function(done){
+    it(new Date().toString()+' should write without error, resolving to {bucket, file}', function(done){
 	(pipeToStorage(source, bucket, fname)
 	 .then(function(ok){
 	     assert.equal(ok.bucket, bucket);
@@ -28,7 +28,7 @@ function testWrite(source, fname, contents){
 	);
     });
     
-    it('should read back written message', function(done){
+    it(new Date().toString()+' should read back written message', function(done){
 	(storage
 	 .bucket(bucket)
 	 .file(fname)
@@ -42,12 +42,12 @@ function testWrite(source, fname, contents){
 	 .then(done)
 	);
     });
-    it('cleanup', function(done){
+    it(new Date().toString()+' cleanup', function(done){
 	return (storage
 		.bucket(bucket)
 		.file(fname)
 		.delete()
-		.then(done)
+		.then(()=>{done();})
 	       );
     }); 
 
