@@ -5,6 +5,7 @@
 
 const intoStream = require('into-stream');
 const promiseRetry = require('promise-retry');
+const mime = require('mime-types');
 
 function storeOrFail(storage, localStream, bucketName, fileName, wsOptions){
     "use strict";
@@ -63,8 +64,12 @@ module.exports = function pipeToStorage(storage, _retryStrategy){
 	    streamer = ()=>(intoStream(source));
 	} else if (typeof(source)==='function'){
 	    streamer = source;
-	}		
-	if (opt === 'json'){
+	}
+	if (typeof(opt)==='undefined'){
+	    const fileExtContentType = mime.lookup(fileName);
+	    if (fileExtContentType)
+		meta = contentType(fileExtContentType);
+	} else if (opt === 'json'){
 	    meta = contentType('application/json');
 	} else if (opt && (typeof(opt)==='string')){
 	    meta = contentType(opt);
