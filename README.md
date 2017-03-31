@@ -38,8 +38,9 @@ is used that is appropriate for a cloud back-end environment: up to 3 retries pe
 
 `optional` is optional and may be:
 
-* the string `'json'`, shorthand to set metadata `content-type: application/json`
-* other strings, for setting the `content-type` (be precise)
+* absent or `undefined` -- `pipeToStorage` should try to look up the `content-type` from the fileName extension
+* the string `'json'` -- shorthand to set metadata `content-type: application/json`
+* other strings --  sets the metadata `content-type` manually
 * an object, to set any `writeStream.options` in the internal storage `createWriteStream` call
 
 returns a Promise that resolves after saving the contents of `source` to 
