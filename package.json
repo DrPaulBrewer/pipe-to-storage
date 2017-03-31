@@ -1,6 +1,6 @@
 {
   "name": "pipe-to-storage",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "returns Promise that resolves on saving a local readable stream to a Google Cloud storage bucket",
   "main": "index.js",
   "scripts": {
