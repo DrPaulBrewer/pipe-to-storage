@@ -2,6 +2,7 @@
 
 const assert = require('assert');
 require('should');
+const md5Base64 = require('md5-base64');
 
 const storage = require('@google-cloud/storage')({
     projectId: 'eaftc-open-source-testing',
@@ -15,16 +16,17 @@ const badBucket = 'eaftc-travis-testing-nonexistent-bucket';
 const fs = require('fs');
 
 function testWrite(source, fname, contents){
-    it(new Date().toString()+' should write to good bucket without error, resolving to {bucket, file}', function(done){
+    it(new Date().toString()+' should write to good bucket without error, resolving to {bucket, file, md5, length} all correct', function(done){
 	(pipeToStorage(source, bucket, fname)
 	 .then(function(ok){
 	     assert.equal(ok.bucket, bucket);
 	     assert.equal(ok.file, fname);
+	     assert.equal(ok.length, contents.length);
+	     assert.equal(ok.md5, md5Base64(contents));
 	 })
 	 .then(done)
 	);
-    });
-    
+    });    
     it(new Date().toString()+' should read back written message', function(done){
 	(storage
 	 .bucket(bucket)

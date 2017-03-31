@@ -18,7 +18,7 @@ On other platforms: set up your API key, see [relevant docs](https://www.npmjs.c
 
     pipeToStorage(source, bucketName, fileName , optional )
     .then(function(what){ 
-       console.log("hooray! I wrote "+what.file+" to bucket "+what.bucket);
+       console.log("hooray! I wrote "+what.file+" to bucket "+what.bucket+" and it should have md5 "+what.md5);
      })
      .catch(function(e){
        console.log("oh no! an error occurred. here it is:");
@@ -43,8 +43,10 @@ is used that is appropriate for a cloud back-end environment: up to 3 retries pe
 * other strings --  sets the metadata `content-type` manually
 * an object, to set any `writeStream.options` in the internal storage `createWriteStream` call
 
-returns a Promise that resolves after saving the contents of `source` to 
+returns a Promise that resolves to {bucket, file, md5, length} after saving the contents of `source` to 
 `storage.bucket(bucketName).file(fileName)` or rejects with any errors not caught in retrys
+
+md5 is in base64
 
 ## Tests
 
