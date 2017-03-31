@@ -1,7 +1,7 @@
 {
   "name": "pipe-to-storage",
   "version": "0.7.0",
-  "description": "returns Promise that resolves on saving a local readable stream to a Google Cloud storage bucket",
+  "description": "Saves stuff (strings, readable streams, functions yielding readable streams)  in a Google Storage bucket, with less typing. Handles retries, mime-types for you. Returns Promise",
   "main": "index.js",
   "scripts": {
     "test": "node_modules/.bin/mocha --reporter spec --slow 50 --timeout 60000"

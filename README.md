@@ -8,7 +8,7 @@ On Google platforms:
 
     const storage = require('@google-cloud/storage')();
 
-On other platforms: see [npm docs](https://www.npmjs.com/package/@google-cloud/storage)
+On other platforms: set up your API key, see [relevant docs](https://www.npmjs.com/package/@google-cloud/storage)
 
 **Pass the storage object** when setting up pipeToStorage for usage
 
