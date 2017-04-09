@@ -19,6 +19,7 @@ const defaultRetryStrategy = {
 function storeOrFail(storage, localStream, bucketName, fileName, wsOptions){
     "use strict";
     return new Promise(function(resolve, reject){
+	const myObject = "gs://"+bucketName+"/"+fileName;
 	const remote = (storage
 			.bucket(bucketName)
 			.file(fileName)
@@ -44,7 +45,6 @@ function storeOrFail(storage, localStream, bucketName, fileName, wsOptions){
 			.file(fileName)
 			.get()
 			.then(function(info){
-			    const myObject = "gs://"+bucketName+"/"+fileName;
 			    if ( !info ||  !(info[1]) || !(info[1].md5Hash) ){
 				console.log(JSON.stringify(info));
 				throw new Error("can not confirm creation of "+myObject);
@@ -54,17 +54,17 @@ function storeOrFail(storage, localStream, bucketName, fileName, wsOptions){
 		       ).catch(retry);
 	    }, defaultRetryStrategy).then(function(uploadedMD5){
 		if (uploadedMD5 !== md5)
-		    throw new Error("corrupted md5 hash for "+myObject+" expected: "+md5+" got: "+uploadedMD5);
+		    reject(new Error("corrupted md5 hash for "+myObject+" expected: "+md5+" got: "+uploadedMD5));
 		else
 		    resolve({bucket: bucketName, file: fileName, md5: md5, length: length});		    
 	    });		
 	});
 	localStream.on('error', function(e){
 	    remote.end();
-	    reject("piptToStorage: error reading local input stream:"+e);
+	    reject("pipeToStorage: error reading local input stream:"+e);
 	});
 	remote.on('error', function(e){
-	    reject("pipeToStorage: error while writing gs://"+bucketName+"/"+fileName+":"+e);
+	    reject("pipeToStorage: error while writing "+myObject+" : "+e);
 	});
 	localStream.pipe(md5buddy).pipe(remote);
     });
