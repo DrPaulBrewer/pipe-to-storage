@@ -1,5 +1,7 @@
 # pipe-to-storage
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/DrPaulBrewer/pipe-to-storage.svg)](https://greenkeeper.io/)
+
 [![Build Status](https://travis-ci.org/DrPaulBrewer/pipe-to-storage.svg?branch=master)](https://travis-ci.org/DrPaulBrewer/pipe-to-storage)
 
 ## Importing and Setup
