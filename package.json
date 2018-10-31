@@ -1,6 +1,6 @@
 {
   "name": "pipe-to-storage",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "Saves stuff (strings, readable streams, functions yielding readable streams)  in a Google Storage bucket, with less typing. Handles retries, mime-types for you. Returns Promise",
   "main": "index.js",
   "scripts": {
