@@ -4,7 +4,7 @@ const assert = require('assert');
 require('should');
 const md5Base64 = require('md5-base64');
 
-const {Storage} = require('@googe-cloud/storage');
+const {Storage} = require('@google-cloud/storage');
 
 const storage = new Storage({
     projectId: 'eaftc-open-source-testing',
