@@ -8,7 +8,14 @@
 
 On Google platforms:
 
-    const storage = require('@google-cloud/storage')();
+    // storage version 2.x
+    
+    const {Storage} = require('@google-cloud/storage');
+    const storage = new Storage();
+    
+    // storage version 1.x
+
+    const storage = require('@google-cloud/storage')(); // storage 1.x
 
 On other platforms: set up your API key, see [relevant docs](https://www.npmjs.com/package/@google-cloud/storage)
 
