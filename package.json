@@ -18,7 +18,7 @@
   "homepage": "https://github.com/DrPaulBrewer/pipe-to-storage#readme",
   "dependencies": {
     "digest-stream": "^2.0.0",
-    "into-stream": "^4.0.0",
+    "into-stream": "^5.0.0",
     "mime-types": "^2.1.18",
     "promise-retry": "^1.1.1"
   },
