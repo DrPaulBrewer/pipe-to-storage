@@ -3,3 +3,4 @@ gpg
 node_modules
 *~
 test-storage.json
+coverage
