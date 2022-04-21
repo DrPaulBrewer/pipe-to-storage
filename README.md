@@ -1,8 +1,9 @@
 # pipe-to-storage
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/DrPaulBrewer/pipe-to-storage.svg)](https://greenkeeper.io/)
-
-[![Build Status](https://travis-ci.org/DrPaulBrewer/pipe-to-storage.svg?branch=master)](https://travis-ci.org/DrPaulBrewer/pipe-to-storage)
+![Build Status](https://github.com/DrPaulBrewer/pipe-to-storage/actions/workflows/node.js.yml/badge.svg)
+[![Known Vulnerabilities](https://snyk.io/test/github/DrPaulBrewer/pipe-to-storage/badge.svg)](https://snyk.io/test/github/DrPaulBrewer/pipe-to-storage)
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/DrPaulBrewer/pipe-to-storage.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/DrPaulBrewer/pipe-to-storage/context:javascript)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/DrPaulBrewer/pipe-to-storage.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/DrPaulBrewer/pipe-to-storage/alerts/)
 
 ## Importing and Setup
 
