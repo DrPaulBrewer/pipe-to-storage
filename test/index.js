@@ -7,8 +7,7 @@ const md5Base64 = require('md5-base64');
 const {Storage} = require('@google-cloud/storage');
 
 const storage = new Storage({
-    projectId: 'eaftc-open-source-testing',
-    keyFilename: './test/storage.json'
+    keyFilename: './test-storage.json'
 });
 
 const pipeToStorage = require('../index.js')(storage);
